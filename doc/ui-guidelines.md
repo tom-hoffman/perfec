@@ -6,13 +6,15 @@ Software developers often follow a standard set of user (or "human") interface g
 
 If you are developing software for the Circuit Playground Express (CPX) to act as part of the PERFEC System, please follow the guidelines below.
 
+Words in all caps; e.g, MAY, MUST, follow their definition in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119).
+
 ## Active and Configuration Modes
 
 Most PERFEC System interfaces will have two modes, commonly representing an active/playing mode and a configuration mode allowing the user to make common adjustments to the behavior of the module (e.g., selecting a MIDI note setting the tempo).
 
 ## Brightness
 
-The default neopixel brightness SHOULD be `0.2`, e.g., `neopixel.NeoPixel(board.NEOPIXEL, 10, brightness=0.2, auto_write=False)`.
+The overall neopixel brightness MUST be `0.2`, e.g., `neopixel.NeoPixel(board.NEOPIXEL, 10, brightness=0.2, auto_write=False)`.
 
 ## Orientation
 
@@ -26,4 +28,4 @@ When respresenting a sequence, the first neopixel (neopixel 0) MUST be the pixel
 
 ### Single selections
 
-T
+
