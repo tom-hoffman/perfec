@@ -16,6 +16,10 @@ Most PERFEC System interfaces will have two modes, commonly representing an acti
 
 The overall neopixel brightness MUST be `0.2`, e.g., `neopixel.NeoPixel(board.NEOPIXEL, 10, brightness=0.2, auto_write=False)`.
 
+## Red LED
+
+The CPX's red LED MUST indicate USB MIDI activity.  The red LED SHOULD toggle on/off when the primary MIDI message used by the module is received or sent.  A release version of a module SHOULD NOT toggle the red LED on every MIDI message received.
+
 ## Orientation
 
 The interface MUST be designed with the USB port pointing up, the white text on the board should be upright, and button A on the left.
