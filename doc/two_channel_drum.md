@@ -6,9 +6,52 @@ A two channel drum machine made out of five Circuit Playground Express (CPX) mic
 
 This drum machine is based around two Euclidian sequencers.  A sequencer is a device or program which signals to an electronic instrument when to play a note or sample.  A Euclidian sequencer uses Euclid's Algorithm to evenly distribute a given number of played notes (triggers) over a total number of steps.  This type of sequencer is commonly used to generate a wide range of traditional rhythms from around the world, particularly polyrhythms, and it lets you quickly generate interesting beats with just the two buttons on a CPX.
 
-## What You Need
+## What You Need:
 
 * 5 Circuit Playground Express boards;
-* a computer connected to the internet that is configured to act as the USB host;
-* at least five open USB ports you can connect to the computer, whether on a hub, directly on the PC, or a combination of the two;
-* 
+* a computer connected to the internet that is configured to act as the USB MIDI host (more on this in a minute);
+* at least five open USB ports you can connect to the computer, whether on a USB hub, directly on the PC, or a combination of the two;
+* five micro USB cables.
+
+This will also be easier if you can temporarily mount everything in place:
+* a piece of cardboard, foam core, etc. about 11" by 14";
+* masking tape, poster tack, etc.
+
+By itself, your drum machine will quietly click using the tiny built in speaker on the CPX.  Once it is clicking away, to get a more satisfying sound level you will want:
+
+* alligator clip wires, like those which come with a CPX class set;
+* some kind of *powered* speakers (like computer speakers) or headphones with a built in or separate input cable you can clip onto.
+
+If you want a more permanent setup, we will be posting 3d printable panels and instructions for securely attaching CPXs and jack sockets.
+
+## Setting up a Computer as a USB MIDI Host
+
+USB is the Universal Serial Bus, the standard way computers are connected to peripherals as well as a low voltage power source.  MIDI is the Musical Instrument Digital Interface, which is the protocol musical instruments talk to each other.  USB-MIDI means we're using USB to send and receive MIDI messages (there are many other ways to send MIDI as well).  This method requires a computer to act as the "host" of what is essentially a small network of Circuit Playgrounds.  
+
+In practice, this host is usually a PC, Mac, Raspberry Pi or tablet.  It is possible with a more powerful microcontrollers like the RP2040 as well.
+
+### Using a DAW on Mac or Windows.
+
+Sadly, on Mac and Windows, this doesn't "just work."  On these systems, USB-MIDI hosting is usually handled through a Digital Audio Workstation (DAW) such as GarageBand, FL Studio, Logic or Ableton.  If you're used to using these, then your PERFEC System CPXs should show up and communicate like other MIDI devices.  On the other hand, we haven't tested this much, as we don't have DAWs set up at school.
+
+### Setting up a USB-MIDI Host on a Rasperry Pi or other Linux PC
+
+If you've already got five Circuit Playgrounds, there's a pretty good chance you've got a Raspberry Pi lying around, and we generally use these and Linux PCs as the USB-MIDI host.  In particular you can eventually just integrate a Raspberry Pi to make a complete, portable drum machine.  
+
+One of the keys to this entire project has been [these excellent instructions on setting up a Rasberry Pi as a USB-MIDI host by Fabio Barbon at Neumatica Studio](https://neuma.studio/rpi-as-midi-host/).  They provide pre-configured images for the Raspberry Pi 2B/3B/4B that don't require anything beyond installing the images on a microSD card.  In our experience these work fine.
+
+If you have a different Rasberry Pi (e.g., Raspberry Pi 5), or *any other computer running a Debian-based Linux distribution* such as Raspbian or Ubuntu, then you can also simply use part of the ["detailed instructions"](https://neuma.studio/raspberry-pi-as-usb-bluetooth-midi-host/) to manually add USB-MIDI host capability.  The instructions are *very* clear and the process is fairly easy if you have any experience with copy/pasting commands into a terminal window.  
+
+If you're using a Rasberry Pi, the detailed instructions include preliminary steps to connect over WiFi and SSH to a fresh Rasberry Pi with a minimal installation.  we find it easier and less intimidating just do a full desktop install and perform these steps directly on the Raspberry Pi.  You can disable the graphical interface later to get faster USB performance if you need to. 
+
+If you are doing this with a regular Linux or Raspbian desktop, you can scroll down through the instructions and start with the commands:
+
+```
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install ruby git
+```
+These are right above the section header **CONFIGURING AUTOMATIC MIDI CONNECTION**  Continue until you get to **MIDI BLUETOOTH SETUP**.
+
+
+
