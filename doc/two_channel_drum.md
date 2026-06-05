@@ -36,7 +36,7 @@ Sadly, on Mac and Windows, this doesn't "just work."  On these systems, USB-MIDI
 
 ### Setting up a USB-MIDI Host on a Rasperry Pi or other Linux PC
 
-If you've already got five Circuit Playgrounds, there's a pretty good chance you've got a Raspberry Pi lying around, and we generally use these and Linux PCs as the USB-MIDI host.  In particular you can eventually just integrate a Raspberry Pi to make a complete, portable drum machine.  
+If you've already got five Circuit Playgrounds, there's a pretty good chance you've got a Raspberry Pi lying around, and we generally use these and Linux PCs as the USB-MIDI host.  In particular you can eventually just integrate a Raspberry Pi into a case with the CPXs to make a complete, portable drum machine.  
 
 One of the keys to this entire project has been [these excellent instructions on setting up a Rasberry Pi as a USB-MIDI host by Fabio Barbon at Neumatica Studio](https://neuma.studio/rpi-as-midi-host/).  They provide pre-configured images for the Raspberry Pi 2B/3B/4B that don't require anything beyond installing the images on a microSD card.  In our experience these work fine.
 
@@ -53,5 +53,6 @@ sudo apt-get install ruby git
 ```
 These are right above the section header **CONFIGURING AUTOMATIC MIDI CONNECTION**  Continue until you get to **MIDI BLUETOOTH SETUP**.
 
+## Setting Up CircuitPython on the CPX
 
-
+In your PERFEC System, your Circuit Playgrounds will probably get frequently shut down and restarted without being properly unmounted, as much as you try to remember to eject.  We *think* the CPX handles this a bit better 
