@@ -32,7 +32,11 @@ In practice, this host is usually a PC, Mac, Raspberry Pi or tablet.  It is poss
 
 ### Using a DAW on Mac or Windows.
 
-Sadly, on Mac and Windows, this doesn't "just work."  On these systems, USB-MIDI hosting is usually handled through a Digital Audio Workstation (DAW) such as GarageBand, FL Studio, Logic or Ableton.  If you're used to using these, then your PERFEC System CPXs should show up and communicate like other MIDI devices.  On the other hand, we haven't tested this much, as we don't have DAWs set up at school.
+Sadly, on Mac and Windows, this doesn't "just work."  On these systems, USB-MIDI hosting is usually handled through a Digital Audio Workstation (DAW) such as GarageBand, FL Studio, Logic or Ableton.  If you're used to using these, then your PERFEC System CPXs should show up and communicate like other MIDI devices.  On the other hand, we haven't tested this much, as we don't have DAWs set up at school.  We have not figured out how to set up a Mac or Windows PC to act as a USB-MIDI host without using a DAW.
+
+### Chromebooks?
+
+We have not really tried this.  It is probably possible on a non-locked down, that is a personal, Chromebook, using the Linux subsystem and following the instructions below..
 
 ### Setting up a USB-MIDI Host on a Rasperry Pi or other Linux PC
 
@@ -55,4 +59,26 @@ These are right above the section header **CONFIGURING AUTOMATIC MIDI CONNECTION
 
 ## Setting Up CircuitPython on the CPX
 
-In your PERFEC System, your Circuit Playgrounds will probably get frequently shut down and restarted without being properly unmounted, as much as you try to remember to eject.  We *think* the CPX handles this a bit better 
+### OPTIONAL: Update your Firmware
+
+In your PERFEC System, your Circuit Playgrounds will probably get frequently shut down and restarted without being properly unmounted, as much as you try to remember to eject.  We *think* the most recent CPX firmware handles this a bit better, but we've not done any A/B testing, and it may be our imagination or some other change in how we use the CPX.  You might safely skip this step and then come back if you find your CPXs are frequently reverting to write protected or otherwise misbehaving beyond what the simple disk repair process can fix.
+
+* [Go to the CircuitPython download page for the Circuit Playground Express](https://circuitpython.org/board/circuitplayground_express/).
+
+<img src="https://github.com/user-attachments/assets/bf8e881e-7d60-4c54-a2ac-c003f5cf7926" />
+
+* Scroll down to the firmware section, It should look like this (the latest version will probably have changed since we wrote this):
+
+<img width="400" height="373" alt="image3" src="https://github.com/user-attachments/assets/78cdbcca-9777-4dd5-8fb8-852a09fd2814" />
+
+* Click on `DOWNLOAD UPDATER U2F` on the Adafruit page. Now plug in a Circuit Playground. You should get a notification that a device has been plugged in. Follow the directions in the 3rd paragraph above. The drive will probably be called "CPLAYBOOT" rather than "BOOT." 
+
+* After you’ve done this there should be a file on the CPLAYBOOT drive called “INFO_UF2” and it should have the version number as the download page.
+
+<img width="279" height="184" alt="image4" src="https://github.com/user-attachments/assets/0c20c10b-3aea-4df0-8637-511b1733b4ea" />
+
+### Installing a Supported CircuitPython
+
+Because most PERFEC System boards use pre-compiled code, you'll have to download a version of CircuitPython specifically supported by the PERFEC System (or pre-compile the libraries to work with another version, if you know how to do that). 
+
+Currently we recommend CircuitPython 10.1.4.  
