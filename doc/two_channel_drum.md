@@ -42,11 +42,11 @@ We have not really tried this.  It is probably possible on a non-locked down, th
 
 If you've already got five Circuit Playgrounds, there's a pretty good chance you've got a Raspberry Pi lying around, and we generally use these and Linux PCs as the USB-MIDI host.  In particular you can eventually just integrate a Raspberry Pi into a case with the CPXs to make a complete, portable drum machine.  
 
-One of the keys to this entire project has been [these excellent instructions on setting up a Rasberry Pi as a USB-MIDI host by Fabio Barbon at Neumatica Studio](https://neuma.studio/rpi-as-midi-host/).  They provide pre-configured images for the Raspberry Pi 2B/3B/4B that don't require anything beyond installing the images on a microSD card.  In our experience these work fine.
+One of the keys to this entire project has been [these excellent instructions on setting up a Raspberry Pi as a USB-MIDI host by Fabio Barbon at Neumatica Studio](https://neuma.studio/rpi-as-midi-host/).  They provide pre-configured images for the Raspberry Pi 2B/3B/4B that don't require anything beyond installing the images on a microSD card.  In our experience these work fine.
 
-If you have a different Rasberry Pi (e.g., Raspberry Pi 5), or *any other computer running a Debian-based Linux distribution* such as Raspbian or Ubuntu, then you can also simply use part of the ["detailed instructions"](https://neuma.studio/raspberry-pi-as-usb-bluetooth-midi-host/) to manually add USB-MIDI host capability.  The instructions are *very* clear and the process is fairly easy if you have any experience with copy/pasting commands into a terminal window.  
+If you have a different Raspberry Pi (e.g., Raspberry Pi 5), or *any other computer running a Debian-based Linux distribution* such as Raspbian or Ubuntu, then you can also simply use part of the ["detailed instructions"](https://neuma.studio/raspberry-pi-as-usb-bluetooth-midi-host/) to manually add USB-MIDI host capability.  The instructions are *very* clear and the process is fairly easy if you have any experience with copy/pasting commands into a terminal window.  
 
-If you're using a Rasberry Pi, the detailed instructions include preliminary steps to connect over WiFi and SSH to a fresh Rasberry Pi with a minimal installation.  we find it easier and less intimidating just do a full desktop install and perform these steps directly on the Raspberry Pi.  You can disable the graphical interface later to get faster USB performance if you need to. 
+If you're using a Raspberry Pi, the detailed instructions include preliminary steps to connect over WiFi and SSH to a fresh Raspberry Pi with a minimal installation.  we find it easier and less intimidating just do a full desktop install and perform these steps directly on the Raspberry Pi.  You can disable the graphical interface later to get faster USB performance if you need to. 
 
 If you are doing this with a regular Linux or Raspbian desktop, you can scroll down through the instructions and start with the commands:
 
@@ -80,6 +80,8 @@ In your PERFEC System, your Circuit Playgrounds will probably get frequently shu
 ### Installing a Supported CircuitPython
 
 Because most PERFEC System boards use pre-compiled code, you'll have to download a version of CircuitPython specifically supported by the PERFEC System (or pre-compile the libraries to work with another version, if you know how to do that). 
+
+Open boot_out.txt on the CircuitPlayground and read the first line with the required version, either CircuitPython.10.0.3 or CircuitPython.10.1.4. If it is a different version, you will have to install one of those versions.
 
 Currently we recommend CircuitPython 10.1.4.  
 
