@@ -117,5 +117,6 @@ For each board, follow these steps:
 * Drag all the files from the unzipped folder to CIRCUITPY. Note that code.py and other .py and .mpy files should be directly in CIRCUITPY, not enclosed in another folder.
 * After the files copy, the Circuit Playground’s neopixels should change to something other than all green, or solid white, or flashing red or yellow.
 
-[Initial setup video](https://drive.google.com/file/d/1d4w4niO3vPf2-eCwLhLkHZQjL8RvQ5ET/view?usp=drive_link)
-
+[Initial connection check video](https://drive.google.com/file/d/1d4w4niO3vPf2-eCwLhLkHZQjL8RvQ5ET/view?usp=drive_link)
+[Basic configuration video](https://drive.google.com/file/d/13d3uO_K4CJEDPUeYtaqOHzr7q6M80wJf/view?usp=sharing)
+[Sample player video](https://drive.google.com/file/d/10Y_XM5Sd7_rTTCjH-fuyVWu2JzwqtLyi/view?usp=sharing)
