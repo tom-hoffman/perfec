@@ -102,21 +102,40 @@ In this process we will be setting up:
 For each board, follow these steps:
 
 * Plug in one CPX, with CircuitPython installed.
+  
 * After several seconds, a removable drive should appear. By default, these are called CIRCUITPY, but if you've installed other PERFEC System software on it before, it might be different.
+ 
 * Open the removable drive.
+  
 * Open boot_out.txt and read the first line with the required version, either CircuitPython 10.0.3 or CircuitPython 10.1.4.  If it is a different version, you will need to install 10.0.3 or 10.1.4 as instructed above.
+  
 * Go to the release page for the component you are installing:
   * [PERFEC Clock](https://github.com/tom-hoffman/perfec_clock/releases)
   * [PERFEC Euclidian](https://github.com/tom-hoffman/perfec_euclidian/releases)
   * [PERFEC Player](https://github.com/tom-hoffman/perfec_player/releases)
+
 * Choose the latest release and download `Source code (zip)` to somewhere you can find it.  If there are multiple zip files, select the one with the version number that matches with the version number of CircuitPython you are using (as described above).
+
+<img src="https://github.com/user-attachments/assets/aafdc1c0-495c-44ec-8037-eb3607601b91" />
+
 * Navigate to the downloaded zip file on your computer.
+  
 * Unzip the file.
+
+  <img width="400" src="https://github.com/user-attachments/assets/cdff0569-ec7d-48c3-ba9d-ed0e0179ce73" />
+  
 * Open the unzipped folder. There may be a few layers of folders, continue until you see code.py and other files.
+  
 * Delete all files and folders already on the Circuit Playground. After deleting the files the Circuit Playground should flash green.
+  
 * Drag all the files from the unzipped folder to CIRCUITPY. Note that code.py and other .py and .mpy files should be directly in CIRCUITPY, not enclosed in another folder.
+  
 * After the files copy, the Circuit Playground’s neopixels should change to something other than all green, or solid white, or flashing red or yellow.
 
+[Board setup video](https://drive.google.com/file/d/12MoxouWFVcWB8Zqwr7Qv0dZnY8s5SNPT/view?usp=sharing)
+
 [Initial connection check video](https://drive.google.com/file/d/1d4w4niO3vPf2-eCwLhLkHZQjL8RvQ5ET/view?usp=drive_link)
+
 [Basic configuration video](https://drive.google.com/file/d/13d3uO_K4CJEDPUeYtaqOHzr7q6M80wJf/view?usp=sharing)
+
 [Sample player video](https://drive.google.com/file/d/10Y_XM5Sd7_rTTCjH-fuyVWu2JzwqtLyi/view?usp=sharing)
