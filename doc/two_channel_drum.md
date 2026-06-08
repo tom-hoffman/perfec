@@ -82,3 +82,40 @@ In your PERFEC System, your Circuit Playgrounds will probably get frequently shu
 Because most PERFEC System boards use pre-compiled code, you'll have to download a version of CircuitPython specifically supported by the PERFEC System (or pre-compile the libraries to work with another version, if you know how to do that). 
 
 Currently we recommend CircuitPython 10.1.4.  
+
+[Download CircuitPython 10.1.4](https://adafruit-circuit-python.s3.amazonaws.com/bin/circuitplayground_express/en_US/adafruit-circuitpython-circuitplayground_express-en_US-10.1.4.uf2)
+
+You can then follow the rest of the [instructions from Adafruit to install CircuitPython](https://learn.adafruit.com/adafruit-circuit-playground-express/circuitpython-quickstart).
+
+Repeat the above steps for each CPX in your PERFEC System.  We recommend plugging in one CPX at a time and ejecting its drive and unplugging before moving to the next board.  Note that once you have the files downloaded, you can drag and drop the files to copy them onto all your CPXs.  This goes pretty quickly.  
+
+### Installing PERFEC System Software
+
+These steps install the Perfec System code.  Again we recommend to work on one board at a time in this step so you don't get the boards too mixed up during the installation step.
+
+In this process we will be setting up:
+
+* 1 x PERFEC Clock (MIDI clock)
+* 2 x PERFEC Euclidian (Euclidian sequencer)
+* 2 x PERFEC Player (sample player)
+
+For each board, follow these steps:
+
+* Plug in one CPX, with CircuitPython installed.
+* After several seconds, a removable drive should appear. By default, these are called CIRCUITPY, but if you've installed other PERFEC System software on it before, it might be different.
+* Open the removable drive.
+* Open boot_out.txt and read the first line with the required version, either CircuitPython 10.0.3 or CircuitPython 10.1.4.  If it is a different version, you will need to install 10.0.3 or 10.1.4 as instructed above.
+* Go to the release page for the component you are installing:
+  * [PERFEC Clock](https://github.com/tom-hoffman/perfec_clock/releases)
+  * [PERFEC Euclidian](https://github.com/tom-hoffman/perfec_euclidian/releases)
+  * [PERFEC Player](https://github.com/tom-hoffman/perfec_player/releases)
+* Choose the latest release and download `Source code (zip)` to somewhere you can find it.  If there are multiple zip files, select the one with the version number that matches with the version number of CircuitPython you are using (as described above).
+* Navigate to the downloaded zip file on your computer.
+* Unzip the file.
+* Open the unzipped folder. There may be a few layers of folders, continue until you see code.py and other files.
+* Delete all files and folders already on the Circuit Playground. After deleting the files the Circuit Playground should flash green.
+* Drag all the files from the unzipped folder to CIRCUITPY. Note that code.py and other .py and .mpy files should be directly in CIRCUITPY, not enclosed in another folder.
+* After the files copy, the Circuit Playground’s neopixels should change to something other than all green, or solid white, or flashing red or yellow.
+
+[Initial setup video](https://drive.google.com/file/d/1d4w4niO3vPf2-eCwLhLkHZQjL8RvQ5ET/view?usp=drive_link)
+
