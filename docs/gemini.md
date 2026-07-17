@@ -1,48 +1,30 @@
-# PERFEC System Development Blueprint & Workflow
+# Context for Continued Development: PERFEC Modular MIDI Suite
 
-This document outlines the architectural constraints and communication workflow for developing new hardware components for the PERFEC System MIDI project on the Circuit Playground Express (SAMD21).
+We are developing a modular MIDI clock and sequencer suite running on Adafruit Circuit Playground Express (CPX) boards (SAMD21 processor) under CircuitPython. The suite connects to a hardware/Pico 2W master clock and test rig.
 
----
+This codebase serves as a teaching tool for high school computer science students. The goal is to maximize real-time timing execution and eliminate latency jitter while reinforcing structural computing principles.
 
-## 1. Core Architectural Constraints
-To maintain microsecond-level timing accuracy and prevent `MemoryError` crashes on the SAMD21 chip, all new code must adhere to these strict performance rules:
+## 1. System Aims & Critical Timing Constraints
+* **Zero Runtime Heap Allocation:** Tight timing loops running thousands of times per second must NOT create dynamic objects (no dynamic strings, no dynamic dictionary generations, no list slicing `[:]`, no raw byte allocations like `bytes([msg])`, and no local `range()` definitions inside `while` blocks). 
+* **Prevent "MIDI Choke":** Avoid duplicate state messages on the wire. For example, do not stream out redundant `NoteOff` messages on empty rhythm steps; only issue a `NoteOff` if an active `NoteOn` was intentionally fired on that step.
+* **Proactive Memory Management:** Automatic background reactive garbage collection must be disabled at boot (`gc.disable()`). Micro-sweeps (`gc.collect()`) are explicitly triggered only during safe, low-priority timing windows (like right after a clock tick finishes processing).
+* **Latency Compensation:** Account for blocking hardware tasks (like NeoPixel updates or slide switch pin polling) by pre-calculating fixed latency buffers (`config.latency_ns`) and utilizing timeline-anchored timestamps (`next_pulse = now + ns_per_pulse`).
 
-* **Zero-Allocation Execution**: No dynamic object instantiation (`[ ]`, `{ }`, `bytes([x])`, string formatting) inside active execution loops. All data shapes must be pre-allocated in memory at boot.
-* **Pre-Cached Methods**: Bound methods (e.g., `self.midi.get_msg`) must be resolved once during initialization or micro-cached locally immediately before entering the `while True:` loop.
-* **No Software-Emulated Floats**: Use pure integer math (`//`) instead of floating-point math (`/`) to save CPU cycles on the FPU-less SAMD21 processor.
-* **No `isinstance()` or Modulo (`%`) Operations**: Replace `isinstance()` with class type identity checks (`.__class__ is ClassName`), and replace `%` with boundary rollover conditions (`if idx >= LIMIT: idx = 0`).
-* **Controlled Garbage Collection**: Keep global garbage collection enabled, but manually invoke `gc.collect()` *only* at non-time-critical junctions (e.g., on the downbeat after MIDI pulses have successfully fired).
+## 2. Programming Style & Educational Goals
+* **Reinforce Low-Level Concepts:** Maintain literal representations for hexadecimal values (e.g., status bytes like `b'\xF8'`) and binary forms (e.g., masks like `0b10000000`). Do not abstract these away into arbitrary integers.
+* **Readability Over Complex Python Tricks:** Avoid overly advanced or dense syntax shorthand (such as inline ternary statements: `x = 1 if condition else 0`). Prioritize clear, standard, nested block structures (`if/else`) that high school students can easily trace, read, and modify.
+* **Preserve Documentation:** Retain all original multi-line docstrings, inline comments, variable descriptions, and copyright/licensing headers.
+* **Type Hinting:** Maintain explicit type hints on all variables, argument signatures, and method return parameters (e.g., `def main(self) -> "View":`).
 
----
+## 3. Core Structural Patterns
+* **Micro-Caching Buffer Patterns:** Pre-allocate static, mutable objects (like a 3-byte `bytearray` for note outputs or a 1-byte `bytearray` paired with `.readinto()` for MIDI ingestion) inside object constructors (`__init__`) to overwrite data allocation-free at runtime.
+* **Bresenham Integer Math:** Avoid float operations and floating-point round-off errors. Use integer-only accumulator loops to spacing pulses or scale percentages (e.g., `(PPQN * ratio) // 100`).
+* **Object-Oriented 2D State Machines:** Split system modes (Playing, Stopped, Config) into cleanly isolated View and Controller classes. 
+* **Type-Mapped Dictionary Routing:** Avoid runtime reflection checks (like `isinstance()`) or chain-nested `if/elif` statements in the main execution thread. Look up and swap active class instances using static, pre-allocated dictionary maps indexed by class types or switch booleans (e.g., `view_map[switch_state][type(mc)]`).
 
-## 2. Future AI Prompt Template
-When starting a new development session with an AI assistant to build a new component, copy and paste the text block below into the first prompt to instantly align the context boundary:
-
-```text
-We are building a new component for the PERFEC System MIDI project on the Circuit Playground Express (SAMD21). The system architecture uses a zero-allocation, micro-cached, straight-time paradigm to prevent timing jitter and MemoryErrors. Do not use float math, string-based messaging, or dynamic object instantiation inside execution loops. Let's start by designing the architecture for [INSERT NEW COMPONENT NAME HERE].
-```
-
----
-
-## 3. Step-by-Step Development Workflow
-To prevent code regression, expand the codebase module-by-module in this specific order:
-
-### Step 1: The Model (`model.py`)
-Establish or modify the underlying application state data first. 
-* Add new state trackers as integers or fixed-size lists inside the model's `__init__`.
-* Pre-calculate array or tuple lengths at startup to eliminate runtime `len()` overhead.
-* Write localized mutation methods that change attributes without altering object identities.
-
-### Step 2: The View & Input Hardware (`board_controller.py` / `cpx.py`)
-Wire up physical IO interactions to match the updated model changes.
-* Map physical button debouncers or switches directly using high-speed lambda expressions or local reference pointers.
-* Flatten any visual update code (like NeoPixel manipulation loops) to write color values directly to array indices, entirely bypassing multi-layered parent `super()` calls or color helper function stacks.
-
-### Step 3: The System Main Loop (`code.py`)
-Integrate the fully complete model and view components together.
-* Pre-instantiate all potential application views once at startup to avoid runtime object destruction and reallocation.
-* Map structural states using dictionary key-lookups instead of branching `if/elif` logic statements.
-* Use a single local tracking assignment for time collection references (like passing a pre-fetched `time.monotonic_ns()` down through your time check parameters).
-
-### Step 4: Component Review
-When updating an existing module, provide only the target **class block or isolated function loop** to the assistant rather than pasting the entire codebase file. This prevents the LLM from truncating code or accidentally rolling back existing micro-caches.
+## Instructions for the AI Assistant:
+When helping to expand, troubleshoot, or add new modules to this suite:
+1. Ensure all code modifications perfectly match the zero-allocation and performance rules laid out above.
+2. Structure new feature blocks to highlight an educational takeaway (e.g., bit shifting, binary interpretation, indexing math).
+3. Do not over-complicate or optimize beyond the physical constraints of the 10-LED CPX hardware bar if it yields diminishing returns for readability.
+4. Output complete, updated files when requested to make pasting to the board drive straightforward.
